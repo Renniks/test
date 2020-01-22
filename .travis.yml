@@ -13,3 +13,4 @@ script:
 
 after_success:
 - docker push $DOCKER_USERNAME/test:latest
+
