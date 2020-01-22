@@ -1,4 +1,4 @@
-sudo: required
+os: linux
 language: python
 
 services:
@@ -10,7 +10,7 @@ script:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - export REPO=renniks/test
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-- docker build -t $REPO:$COMMIT .
+- docker build -t $REPO .
 
 after_success:
 - docker ps
