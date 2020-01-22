@@ -1,7 +1,15 @@
 sudo: required
 language: python
+
 services:
 - docker
 
+install:
+        
 script:
-- docker build -t renniks/test .
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker build -t $DOCKER_USERNAME/test:latest .
+- docker push $DOCKER_USERNAME/test:latest
+
+after_success:
+- docker push $DOCKER_USERNAME/test:latest
